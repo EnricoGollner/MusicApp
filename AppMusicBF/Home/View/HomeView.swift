@@ -11,6 +11,7 @@ class HomeView: UIView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CardViewTableViewCell.self, forCellReuseIdentifier: CardViewTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()

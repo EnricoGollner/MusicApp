@@ -13,7 +13,6 @@ enum ViewMode  {
 
 class CustomCardView: UIView {
     //MARK: - PROPERTIES
-    var viewMode: ViewMode?
     var containerLeadingConstraint: NSLayoutConstraint?
     var containerTopConstraint: NSLayoutConstraint?
     var containerTrailingConstraint: NSLayoutConstraint?
@@ -140,10 +139,11 @@ class CustomCardView: UIView {
     }()
     
     //MARK: - init (Constructor method)
-    init() {
+    init(mode: ViewMode) {
         let frame = CGRect.zero
         super.init(frame: frame)
         self.setVisualElements()
+        self.updateLayoutConstraints(for: mode)
     }
     
     required init?(coder: NSCoder) {
@@ -167,7 +167,6 @@ class CustomCardView: UIView {
         self.cardContainerView.addSubview(self.descriptionTitleLabel)
         self.cardContainerView.addSubview(self.actionsView)
         
-        self.updateLayoutConstraints(for: self.viewMode ?? .card)
         self.setUpConstraints()
     }
     
@@ -228,12 +227,12 @@ class CustomCardView: UIView {
     }
     
     private func updateLayoutConstraints(for mode: ViewMode) {
-        self.descriptionTitleLabel.isHidden = false
-        
-        if viewMode == .full {
+        if mode == .full {
             self.configContainerConstraints(leadingAnchor: 0, topAnchor: 0, trailingAnchor: 0, bottomAnchor: 0)
+            self.descriptionTitleLabel.isHidden = false
         } else {
             self.configContainerConstraints(leadingAnchor: 30, topAnchor: 15, trailingAnchor: -30, bottomAnchor: -15)
+            self.descriptionTitleLabel.isHidden = true
         }
         
         self.actionsView.updateLayout(for: mode)

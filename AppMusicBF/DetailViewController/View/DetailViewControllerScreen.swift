@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol DetailViewControllerScreenDelegate: AnyObject {
+    func tappedCloseButton()
+}
+
 class DetailViewControllerScreen: UIView {
     
     var cardModel: CardViewModel?
     var navBarTopAnchor: NSLayoutConstraint?
+    
+    private weak var delegate: DetailViewControllerScreenDelegate?
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
@@ -25,12 +31,10 @@ class DetailViewControllerScreen: UIView {
     }()
     
     lazy var cardView: CustomCardView = {
-        let card: CustomCardView = CustomCardView()
+        let card: CustomCardView = CustomCardView(mode: .full)
         card.translatesAutoresizingMaskIntoConstraints = false
-        card.actionsView.updateLayout(for: .full)
         card.cardContainerView.layer.cornerRadius = 0
         card.setUpViewData(data: self.cardModel ?? CardViewModel())
-        
         return card
     }()
     
@@ -59,22 +63,25 @@ class DetailViewControllerScreen: UIView {
     }()
     
     @objc func closePressed() {
-        //TO-DO - Finish method
+        self.delegate?.tappedCloseButton()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(dataView: CardViewModel?) {
+        super.init(frame: CGRect())
+        
+        //When working with StackView, we commonly use DispatchQueue.main.async:
+        // - Beacause when we're using a StackView, we're forcing the screen, so the layout will fully readapt
+        // It's generated when we select the cell and it will force our tableview to grow. Dispatch will help the rendering.
+        //As soon as you add heavy tasks to your app like data loading it slows your UI work down or even freezes it. Concurrency lets you perform 2 or more tasks “simultaneously”. The disadvantage of this approach is that thread safety which is not always as easy to control. F.e. when different tasks want to access the same resources like trying to change the same variable on a different threads or accessing the resources already blocked by the different threads.
+        DispatchQueue.main.async {
+            self.cardModel = dataView
+            self.setUpVisualElements()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    public func configAllDelegates() {
-        
-    }
-    
-    
     
     private func setUpVisualElements() {
         self.addSubview(self.scrollView)
@@ -90,9 +97,7 @@ class DetailViewControllerScreen: UIView {
             .filter({$0.activationState == .foregroundActive})
             .compactMap({$0 as? UIWindowScene})
             .first?.windows.filter({$0.isKeyWindow}).first
-        
         let topPadding = window?.safeAreaInsets.top
-        print(topPadding)
         
         self.scrollView.pin(to: self)
         
@@ -107,12 +112,18 @@ class DetailViewControllerScreen: UIView {
             self.cardView.heightAnchor.constraint(equalToConstant: 500),
             self.cardView.widthAnchor.constraint(equalToConstant: self.frame.size.width),
             
-            self.tableView.topAnchor.constraint(equalTo: self.cardView.bottomAnchor, constant: -(topPadding ?? 0)),
+            self.tableView.topAnchor.constraint(equalTo: self.cardView.bottomAnchor),
             self.tableView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-            self.tableView.heightAnchor.constraint(equalToConstant: CGFloat(80 * (cardModel?.cardList?.count ?? 0) + 20)),
+            self.tableView.heightAnchor.constraint(equalToConstant: CGFloat((80 * (cardModel?.cardList?.count ?? 0)) + 20)),
             self.tableView.widthAnchor.constraint(equalToConstant: self.frame.size.width),
             self.tableView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
         ])
     }
     
+    public func configAllDelegates(tableViewDelegate: UITableViewDelegate, tableViewDataSource: UITableViewDataSource, scrollViewDelegate: UIScrollViewDelegate, detailViewScreenDelegate: DetailViewControllerScreenDelegate) {
+        self.tableView.delegate = tableViewDelegate
+        self.tableView.dataSource = tableViewDataSource
+        self.scrollView.delegate = scrollViewDelegate
+        self.delegate = detailViewScreenDelegate
+    }
 }
