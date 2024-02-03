@@ -79,7 +79,6 @@ class CustomCardView: UIView {
         button.setBackgroundImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .black
         button.layer.cornerRadius = 10
-        
         return button
     }()
     
@@ -199,8 +198,8 @@ class CustomCardView: UIView {
             
             self.addProfileImageButton.trailingAnchor.constraint(equalTo: self.profileBorderView.trailingAnchor, constant: 4),
             self.addProfileImageButton.bottomAnchor.constraint(equalTo: self.profileBorderView.bottomAnchor, constant: 4),
-            self.addProfileImageButton.widthAnchor.constraint(equalToConstant: 15),
-            self.addProfileImageButton.heightAnchor.constraint(equalToConstant: 15),
+            self.addProfileImageButton.widthAnchor.constraint(equalToConstant: 20),
+            self.addProfileImageButton.heightAnchor.constraint(equalToConstant: 20),
             
             self.cardCategoryTitleLabel.topAnchor.constraint(equalTo: self.profileBorderView.bottomAnchor, constant: 10),
             self.cardCategoryTitleLabel.centerXAnchor.constraint(equalTo: self.cardContainerView.centerXAnchor),
