@@ -30,6 +30,15 @@ class DetailViewControllerScreen: UIView {
         return view
     }()
     
+    lazy var navBar: CustomNavBar = {
+        let navBar = CustomNavBar()
+        navBar.translatesAutoresizingMaskIntoConstraints = false
+        navBar.backgroundColor = .black
+        navBar.setUpCell(data: self.cardModel ?? CardViewModel())
+        
+        return navBar
+    }()
+    
     lazy var cardView: CustomCardView = {
         let card: CustomCardView = CustomCardView(mode: .full)
         card.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +95,7 @@ class DetailViewControllerScreen: UIView {
     
     private func setUpVisualElements() {
         self.addSubview(self.scrollView)
+        self.addSubview(self.navBar)
         self.scrollView.addSubview(self.cardView)
         self.scrollView.addSubview(self.tableView)
         self.addSubview(self.closeButton)
@@ -94,11 +104,7 @@ class DetailViewControllerScreen: UIView {
     }
     
     private func setUpConstraints() {
-        let window = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .compactMap({$0 as? UIWindowScene})
-            .first?.windows.filter({$0.isKeyWindow}).first
-        let topPadding = window?.safeAreaInsets.top
+        
         
         self.scrollView.pin(to: self)
         
@@ -108,7 +114,7 @@ class DetailViewControllerScreen: UIView {
             self.closeButton.widthAnchor.constraint(equalToConstant: 30),
             self.closeButton.heightAnchor.constraint(equalToConstant: 30),
             
-            self.cardView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: -(topPadding ?? 0)),
+            self.cardView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: -(self.getSafeAreasTopPadding() ?? 0)),
             self.cardView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
             self.cardView.heightAnchor.constraint(equalToConstant: 500),
             self.cardView.widthAnchor.constraint(equalToConstant: self.frame.size.width),
@@ -118,7 +124,14 @@ class DetailViewControllerScreen: UIView {
             self.tableView.heightAnchor.constraint(equalToConstant: CGFloat((80 * (cardModel?.cardList?.count ?? 0)) + 20)),
             self.tableView.widthAnchor.constraint(equalToConstant: self.frame.size.width),
             self.tableView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            
+            self.navBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.navBar.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.navBar.heightAnchor.constraint(equalToConstant: ((self.getSafeAreasTopPadding() ?? 0) + 80))  // Distance from the top (safe area) + card's height
         ])
+        
+        self.navBarTopAnchor = self.navBar.topAnchor.constraint(equalTo: self.topAnchor, constant: -((self.getSafeAreasTopPadding() ?? 0.0) + 60)) // Distance from the top (safe area) + custom nav Bar card's height
+        self.navBarTopAnchor?.isActive = true
     }
     
     public func configAllDelegates(tableViewDelegate: UITableViewDelegate, tableViewDataSource: UITableViewDataSource, scrollViewDelegate: UIScrollViewDelegate, detailViewScreenDelegate: DetailViewControllerScreenDelegate) {
@@ -128,3 +141,4 @@ class DetailViewControllerScreen: UIView {
         self.delegate = detailViewScreenDelegate
     }
 }
+
