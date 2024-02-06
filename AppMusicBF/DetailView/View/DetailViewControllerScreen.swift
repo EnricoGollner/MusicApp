@@ -72,6 +72,13 @@ class DetailViewControllerScreen: UIView {
         return button
     }()
     
+    lazy var playerView: CustomPlayerView = {
+        let playerView = CustomPlayerView()
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return playerView
+    }()
+    
     @objc func closePressed() {
         self.delegate?.tappedCloseButton()
     }
@@ -99,6 +106,7 @@ class DetailViewControllerScreen: UIView {
         self.scrollView.addSubview(self.cardView)
         self.scrollView.addSubview(self.tableView)
         self.addSubview(self.closeButton)
+        self.addSubview(self.playerView)
         
         self.setUpConstraints()
     }
@@ -127,7 +135,13 @@ class DetailViewControllerScreen: UIView {
             
             self.navBar.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.navBar.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.navBar.heightAnchor.constraint(equalToConstant: ((self.getSafeAreasTopPadding() ?? 0) + 80))  // Distance from the top (safe area) + card's height
+            self.navBar.heightAnchor.constraint(equalToConstant: ((self.getSafeAreasTopPadding() ?? 0) + 80)),  // Distance from the top (safe area) + card's height
+            
+            self.playerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.playerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.playerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.playerView.heightAnchor.constraint(equalToConstant: 120)
+            
         ])
         
         self.navBarTopAnchor = self.navBar.topAnchor.constraint(equalTo: self.topAnchor, constant: -((self.getSafeAreasTopPadding() ?? 0.0) + 60)) // Distance from the top (safe area) + custom nav Bar card's height

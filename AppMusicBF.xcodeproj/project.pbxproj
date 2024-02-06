@@ -25,6 +25,7 @@
 		02A67ABA2B6088D9008CFD7D /* CardActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A67AB92B6088D9008CFD7D /* CardActionView.swift */; };
 		02D0520E2B633E89009B4C40 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0520D2B633E89009B4C40 /* DetailViewController.swift */; };
 		02D052112B633EB2009B4C40 /* DetailViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D052102B633EB2009B4C40 /* DetailViewControllerScreen.swift */; };
+		02DCD1842B71A9990074AD51 /* CustomPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DCD1832B71A9990074AD51 /* CustomPlayerView.swift */; };
 		4C98BE5D34FE6BE5EC7719BF /* Pods_AppMusicBF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E61072424BEDB74A26E9179 /* Pods_AppMusicBF.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		02A67AB92B6088D9008CFD7D /* CardActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActionView.swift; sourceTree = "<group>"; };
 		02D0520D2B633E89009B4C40 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		02D052102B633EB2009B4C40 /* DetailViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerScreen.swift; sourceTree = "<group>"; };
+		02DCD1832B71A9990074AD51 /* CustomPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerView.swift; sourceTree = "<group>"; };
 		3A080BE3595D1F1FA40F0C58 /* Pods-AppMusicBF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppMusicBF.debug.xcconfig"; path = "Target Support Files/Pods-AppMusicBF/Pods-AppMusicBF.debug.xcconfig"; sourceTree = "<group>"; };
 		3E61072424BEDB74A26E9179 /* Pods_AppMusicBF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppMusicBF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB22B348568AA39FF16708D /* Pods-AppMusicBF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppMusicBF.release.xcconfig"; path = "Target Support Files/Pods-AppMusicBF/Pods-AppMusicBF.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				024D1C362B5DB38B0008CAFF /* CustomCardView.swift */,
 				02A67AB92B6088D9008CFD7D /* CardActionView.swift */,
 				02501A382B6EF91F00BB219E /* CustomNavBar.swift */,
+				02DCD1832B71A9990074AD51 /* CustomPlayerView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -204,7 +207,6 @@
 				3A080BE3595D1F1FA40F0C58 /* Pods-AppMusicBF.debug.xcconfig */,
 				DCB22B348568AA39FF16708D /* Pods-AppMusicBF.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -336,6 +338,7 @@
 				025A54622B6EE066006F43E9 /* DetailTableViewCell.swift in Sources */,
 				024D1C122B5CCC120008CAFF /* HomeViewController.swift in Sources */,
 				024D1C0E2B5CCC120008CAFF /* AppDelegate.swift in Sources */,
+				02DCD1842B71A9990074AD51 /* CustomPlayerView.swift in Sources */,
 				025A54652B6EE102006F43E9 /* DetailTableViewCellScreen.swift in Sources */,
 				02D0520E2B633E89009B4C40 /* DetailViewController.swift in Sources */,
 				024D1C292B5CD2870008CAFF /* NSTextAttachment + Extension.swift in Sources */,
@@ -491,6 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9FV2U5727B;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppMusicBF/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Music App";
@@ -500,7 +504,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,6 +515,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -526,6 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9FV2U5727B;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppMusicBF/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Music App";
@@ -535,7 +541,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,6 +552,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
