@@ -82,6 +82,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.screen?.playerView.setUpView(data: self.cardModel?.cardList?[indexPath.row] ?? CardListModel())
+        self.screen?.playerViewBottomAnchor?.constant = 0  // to show the card
+        self.animationWithView()
+    }
+    
 }
 
 extension DetailViewController: DetailViewControllerScreenDelegate {

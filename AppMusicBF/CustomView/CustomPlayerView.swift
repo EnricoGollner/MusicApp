@@ -9,16 +9,13 @@ import MarqueeLabel
 import UIKit
 
 class CustomPlayerView: UIView {
-    
     var musicTimer: Timer?
     var time: CGFloat = 0.0
-    
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
-        imageView.image = UIImage(named: "list4")
         
         return imageView
     }()
@@ -26,7 +23,6 @@ class CustomPlayerView: UIView {
     lazy var marqueeLabel: MarqueeLabel = {
         let label = MarqueeLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Music title will be displayed here"
         label.font = UIFont(name: "Avenir", size: 18)
         label.textColor = .white.withAlphaComponent(0.8)
         label.type = .continuous
@@ -58,7 +54,7 @@ class CustomPlayerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .black.withAlphaComponent(0.8)
+        self.backgroundColor = .black.withAlphaComponent(0.9)
         self.setUpVisualElements()
     }
     
@@ -72,8 +68,7 @@ class CustomPlayerView: UIView {
         self.addSubview(self.pausePlayButton)
         self.addSubview(self.trackBar)
         
-        self.musicTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.updateTrackBar), userInfo: nil, repeats: true)
-        
+        self.initTimer()
         self.setUpConstraints()
     }
     
@@ -105,6 +100,22 @@ class CustomPlayerView: UIView {
         
         if self.time >= 120 {
             self.musicTimer?.invalidate()
+            self.musicTimer = nil
         }
+    }
+    
+    public func setUpView(data: CardListModel) {
+        self.imageView.image = UIImage(named: data.listImage ?? "")
+        self.marqueeLabel.text = data.listTitle
+        self.time = 0.0
+        self.trackBar.progress = 0.0
+        
+        
+        self.initTimer()
+    }
+    
+    private func initTimer() {
+        self.musicTimer = nil
+        self.musicTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.updateTrackBar), userInfo: nil, repeats: true)
     }
 }

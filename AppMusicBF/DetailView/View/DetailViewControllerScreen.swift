@@ -12,9 +12,9 @@ protocol DetailViewControllerScreenDelegate: AnyObject {
 }
 
 class DetailViewControllerScreen: UIView {
-    
     var cardModel: CardViewModel?
     var navBarTopAnchor: NSLayoutConstraint?
+    var playerViewBottomAnchor: NSLayoutConstraint?
     
     private weak var delegate: DetailViewControllerScreenDelegate?
     
@@ -139,13 +139,14 @@ class DetailViewControllerScreen: UIView {
             
             self.playerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.playerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.playerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.playerView.heightAnchor.constraint(equalToConstant: 120)
-            
+            self.playerView.heightAnchor.constraint(equalToConstant: 120),
         ])
         
         self.navBarTopAnchor = self.navBar.topAnchor.constraint(equalTo: self.topAnchor, constant: -((self.getSafeAreasTopPadding() ?? 0.0) + 60)) // Distance from the top (safe area) + custom nav Bar card's height
         self.navBarTopAnchor?.isActive = true
+        
+        self.playerViewBottomAnchor = self.playerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 120)  // setting constant of 120 to hide the playerView
+        self.playerViewBottomAnchor?.isActive = true
     }
     
     public func configAllDelegates(tableViewDelegate: UITableViewDelegate, tableViewDataSource: UITableViewDataSource, scrollViewDelegate: UIScrollViewDelegate, detailViewScreenDelegate: DetailViewControllerScreenDelegate) {

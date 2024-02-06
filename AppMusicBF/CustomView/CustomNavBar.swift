@@ -8,7 +8,6 @@
 import UIKit
 
 class CustomNavBar: UIView {
-    
     lazy var categoryTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -99,5 +98,4 @@ class CustomNavBar: UIView {
         self.cardImage.image = UIImage(named: data.cardImage ?? "")
         self.featureLabel.attributedText = .featureText(data.likeCount ?? "", data.duration ?? "")
     }
-    
 }
