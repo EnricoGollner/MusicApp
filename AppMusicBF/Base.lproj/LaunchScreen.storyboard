@@ -26,7 +26,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="le9-Zd-L32" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bGW-96-5lQ"/>
                             <constraint firstItem="le9-Zd-L32" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="zKf-aJ-BwF"/>
@@ -40,8 +40,8 @@
     </scenes>
     <resources>
         <image name="launch_screen" width="397.7247314453125" height="407.12701416015625"/>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
