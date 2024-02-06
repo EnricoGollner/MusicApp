@@ -12,7 +12,6 @@ enum StateAnimation {
 }
 
 class DetailViewController: UIViewController {
-    
     var screen: DetailViewControllerScreen?
     private var cardModel: CardViewModel?
     var valueAnimation: StateAnimation = .long
@@ -23,10 +22,10 @@ class DetailViewController: UIViewController {
         self.view = self.screen
     }
     
-    override var prefersStatusBarHidden: Bool {  // hiden in status bar
+    override var prefersStatusBarHidden: Bool {  // hide the status bar
         return true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,33 +37,34 @@ class DetailViewController: UIViewController {
     private func animationWithView() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
             self.view.layoutIfNeeded()
-    }
-    
-        func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            if scrollView.contentOffset.y >= 300 {
-                self.screen?.navBarTopAnchor?.constant = 0
-                
-                if(valueAnimation == .long) {
-                    self.animationWithView()
-                }
-                self.valueAnimation = .short
-                
-            } else {
-                let window = UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == .foregroundActive})
-                    .compactMap({$0 as? UIWindowScene})
-                    .first?.windows.filter({$0.isKeyWindow}).first
-                let topPadding = window?.safeAreaInsets.top
-                
-                self.screen?.navBarTopAnchor?.constant = -((topPadding ?? 0) + 80)
-                
-                if(valueAnimation == .short) {
-                    self.animationWithView()
-                }
-                self.valueAnimation = .long
-            }
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= 300 {
+            self.screen?.navBarTopAnchor?.constant = 0
+            
+            if(valueAnimation == .long) {
+                self.animationWithView()
+            }
+            self.valueAnimation = .short
+            
+        } else {
+            let window = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows.filter({$0.isKeyWindow}).first
+            let topPadding = window?.safeAreaInsets.top
+            
+            self.screen?.navBarTopAnchor?.constant = -((topPadding ?? 0) + 80)
+            
+            if(valueAnimation == .short) {
+                self.animationWithView()
+            }
+            self.valueAnimation = .long
+        }
+    }
+    
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
